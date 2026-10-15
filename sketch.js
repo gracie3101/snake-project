@@ -1,12 +1,11 @@
 const GRID_SIZE = 20
-let headX = 0
-let headY = 0
+
+let headX = 20
+let headY = 260
 let foodX = 0
 let foodY = 0
 let xDirection = 1 ;
 let yDirection = 0 ;
-let numberOfCells 
-let gameOver = false
 
 function setup () {
     createCanvas (600,600) ;
@@ -26,6 +25,7 @@ function setup () {
 function draw () {
     background (0)
     square (headX, headY, GRID_SIZE) ;
+    fill (0,255,0) ;
     circle (foodX, foodY, GRID_SIZE / 2) ;
     if(gameOver) {
       headX += GRID_SIZE * xDirection;
