@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const GRID_SIZE = 20
 let headX = 0
 let headY = 0
@@ -19,33 +18,53 @@ function setup () {
     randomCellFloor = floor(randomCell) ;
     foodY = randomCellFloor * GRID_SIZE + GRID_SIZE / 2 ;
     headX += GRID_SIZE;
-    frameRate (4) ;
-    
+    frameRate (5) ;
+    foodX = newFoodCoordinate () ;
+      foodY = newFoodCoordinate () ;
 }
 
 function draw () {
     background (0)
-    square (headX, headY, 20) ;
-    circle (foodX, foodY, 20) ;
+    square (headX, headY, GRID_SIZE) ;
+    circle (foodX, foodY, GRID_SIZE / 2) ;
+    if(gameOver) {
+      headX += GRID_SIZE * xDirection;
+      headY += GRID_SIZE * yDirection;
+    textSize(50)
+    fill(255,0,0)
+    textAlign(CENTER,CENTER)
+    text("GAME_OVER", width / 2, height / 2)
+    }
+}
+
+function newFoodCoordinate () {
+      let numberOfCells = (width - GRID_SIZE * 2) / GRID_SIZE;
+    let gridCell = floor(random(numberOfCells));
+    return gridCell * GRID_SIZE + GRID_SIZE / 2;
+}
+
+function isGameOver () {
+   return headX === 0 || headX === width - GRID_SIZE || headyY === 0 || headY === height - GRID_SIZE ;
 }
 
 function keyPressed () {
-
-   if (key === UP_ARROW) {
-    xDirection = 0 ;
-    yDirection = -1 ;
-   }
-   if (key === DOWN_ARROW) {
-    xDirection = 0 ;
-    yDirection = 1 ;
-   }
-    if (key === LEFT_ARROW) {
+   if (key === LEFT_ARROW) {
     xDirection = -1 ;
     yDirection = 0 ;
     }
-    if (key === RIGHT_ARROW) {
+    else if (key === RIGHT_ARROW) {
     xDirection = 1 ;
     yDirection = 0 ;
+   }
+   else if (key === UP_ARROW) {
+    xDirection = 0 ;
+    yDirection = -1 ;
+   }
+   elseif (key === DOWN_ARROW) {
+    xDirection = 0 ;
+    yDirection = 1 ;
+   }
+   
  }
  if (!gameOver) {
     headX += GRID_SIZE * xDirection ;
@@ -60,11 +79,6 @@ function keyPressed () {
     gameOver = true
  }
 
-if(gameOver) {
-    textSize(50)
-    fill(255,0,0)
-    textAlign(CENTER,CENTER)
-    text("GAME_OVER", width / 2, height / 2)
-}
+
 }
 
