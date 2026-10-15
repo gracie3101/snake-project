@@ -60,7 +60,7 @@ function keyPressed () {
     xDirection = 0 ;
     yDirection = -1 ;
    }
-   elseif (key === DOWN_ARROW) {
+   else if (key === DOWN_ARROW) {
     xDirection = 0 ;
     yDirection = 1 ;
    }
@@ -79,6 +79,4 @@ function keyPressed () {
     gameOver = true
  }
 
-
-}
 
