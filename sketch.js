@@ -2,10 +2,10 @@ const GRID_SIZE = 20
 
 let headX = 20
 let headY = 260
-let foodX = 0
-let foodY = 0
 let xDirection = 1 ;
 let yDirection = 0 ;
+let foodX = 0
+let foodY = 0
 
 function setup () {
     createCanvas (600,600) ;
@@ -24,6 +24,7 @@ function setup () {
 
 function draw () {
     background (0)
+    fill(255);
     square (headX, headY, GRID_SIZE) ;
     fill (0,255,0) ;
     circle (foodX, foodY, GRID_SIZE / 2) ;
