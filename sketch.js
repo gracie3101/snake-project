@@ -23,6 +23,12 @@ function setup () {
     
 }
 
+function draw () {
+    background (0)
+    square (headX, headY, 20) ;
+    circle (foodX, foodY, 20) ;
+}
+
 function keyPressed () {
 
    if (key === UP_ARROW) {
@@ -62,8 +68,3 @@ if(gameOver) {
 }
 }
 
-function draw () {
-    background (0)
-    square (headX, headY, 20) ;
-    circle (foodX, foodY, 20) ;
-}
