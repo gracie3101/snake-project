@@ -1,12 +1,12 @@
 const GRID_SIZE = 20
 
-let headX = 20
-let headY = 260
+let snakeX = [20];
+let snakeY = [260];
 let xDirection = 1 ;
 let yDirection = 0 ;
 let foodX = 0
 let foodY = 0
-let ifSnakeOverFood = () => headX === foodX && headY === foodY
+let isSnakeOverFood = () => snakeX === foodX && snakeY === foodY
 
 /**
  * Sets up the canvas and initial game state
@@ -20,7 +20,7 @@ let ifSnakeOverFood = () => headX === foodX && headY === foodY
  * @param {number} foodX - The initial x-coordinate of the food
  * @param {number} foodY - The initial y-coordinate of the food
  * @param {boolean} gameOver - A flag indicating whether the game is over
- * @param {function} ifSnakeOverFood - A function that checks if the snake is over the food
+ * @param {function} isSnakeOverFood - A function that checks if the snake is over the food
  * @param {function} newFoodCoordinate - A function that generates a new random coordinate for the food
 */
 
@@ -33,7 +33,7 @@ function setup () {
     randomCell = random (numberOfCells) ;
     randomCellFloor = floor(randomCell) ;
     foodY = randomCellFloor * GRID_SIZE + GRID_SIZE / 2 ;
-    headX += GRID_SIZE;
+    snakeX[0] += GRID_SIZE;
     frameRate (5) ;
     foodX = newFoodCoordinate () ;
       foodY = newFoodCoordinate () ;
@@ -55,13 +55,12 @@ function setup () {
 function draw () {
     background (0)
     fill(255);
-    square (headX, headY, GRID_SIZE) ;
     fill (0,255,0) ;
     circle (foodX, foodY, GRID_SIZE / 2) ;
    
     if (isGameOver () === false) {
-      headX += GRID_SIZE * xDirection;
-      headY += GRID_SIZE * yDirection;
+      snakeX[0] += GRID_SIZE * xDirection;
+      snakeY[0] += GRID_SIZE * yDirection;
 
     }
     else {
@@ -69,7 +68,43 @@ function draw () {
     fill(255,0,0)
     textAlign(CENTER,CENTER)
     text("GAME_OVER", width / 2, height / 2) }
+
+    // Draw the snake
+    
+    function drawSnake () {
+      fill (0,255,0) ;
+      for (let i = 0; i < snakeX.length; i++) {
+        if (i === 0) {
+          fill (255,0,0) ;
+        }
+        else {
+          fill (0,255,0) ;
+        }
+        square (snakeX[i], snakeY[i], GRID_SIZE) ;
+      }
+    
    }
+   }
+
+   // Adds a new segment to the snake's body
+
+   function addSnakeSegment () {
+    snakeX.push(snakeX[snakeX.length - 1] - GRID_SIZE * xDirection);
+    snakeY.push(snakeY[snakeY.length - 1] - GRID_SIZE * yDirection);
+  }
+   
+  function moveSnake () {
+    snakeX.unshift(snakeX[0] + GRID_SIZE * xDirection);
+    snakeY.unshift(snakeY[0] + GRID_SIZE *yDirection);
+    snakeX.pop() ;
+    snakeY.pop() ;
+  }
+
+  function randomCoordinate () {
+    let margin = GRID_SIZE * 2;
+    let gridCell = floor(random(width - margin / GRID_SIZE))
+    return gridCell * GRID_SIZE + GRID_SIZE * 1.5 ;
+  }
 
    /**
     * Generates a new random coordinate for the food
@@ -90,7 +125,7 @@ function newFoodCoordinate () {
  */
 
 function isGameOver () {
-   if (headX <= 0 || headX >= width - GRID_SIZE || headY <= 0 || headY >= height - GRID_SIZE) { ;
+   if (snakeX[0] <= 0 || snakeX[0] >= width - GRID_SIZE || snakeY[0] <= 0 || snakeY[0] >= height - GRID_SIZE) { ;
 return true}
 else {return false}
 }
@@ -100,8 +135,8 @@ else {return false}
  * @param {string} key - The key that was pressed
  * @param {number} xDirection - The current x-direction of the snake's movement
  * @param {number} yDirection - The current y-direction of the snake's movement
- * @param {number} headX - The x-coordinate of the snake's head
- * @param {number} headY - The y-coordinate of the snake's head
+ * @param {number} snakeX - The x-coordinate of the snake
+ * @param {number} snakeY - The y-coordinate of the snake
  * @param {boolean} gameOver - A flag indicating whether the game is over
  * @param {function} isSnakeOverFood - A function that checks if the snake is over the food
  * @param {function} newFoodCoordinate - A function that generates a new random coordinate for the food
@@ -128,6 +163,7 @@ function keyPressed () {
    if (isSnakeOverFood()) {
       foodX = newFoodCoordinate () ;
     foodY = newFoodCoordinate () ;
+    addSnakeSegment () ;
    }
 }
 
