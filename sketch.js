@@ -136,6 +136,9 @@ function keyPressed () {
     headY < 0 ||
     headX >= width ||
     headY >=height
- ){
-    gameOver = true 
- }
+ ) }
+
+
+{
+ gameOver = true 
+}
