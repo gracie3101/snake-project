@@ -6,7 +6,6 @@ let xDirection = 1 ;
 let yDirection = 0 ;
 let foodX = 0
 let foodY = 0
-let gameOver = false
 let ifSnakeOverFood = () => headX === foodX && headY === foodY
 
 /**
@@ -59,14 +58,17 @@ function draw () {
     square (headX, headY, GRID_SIZE) ;
     fill (0,255,0) ;
     circle (foodX, foodY, GRID_SIZE / 2) ;
-    if(gameOver) {
+   
+    if (isGameOver () === false) {
       headX += GRID_SIZE * xDirection;
       headY += GRID_SIZE * yDirection;
+
+    }
+    else {
     textSize(50)
     fill(255,0,0)
     textAlign(CENTER,CENTER)
-    text("GAME_OVER", width / 2, height / 2)
-    }
+    text("GAME_OVER", width / 2, height / 2) }
    }
 
    /**
@@ -88,7 +90,9 @@ function newFoodCoordinate () {
  */
 
 function isGameOver () {
-   return headX === 0 || headX === width - GRID_SIZE || headyY === 0 || headY === height - GRID_SIZE ;
+   if (headX <= 0 || headX >= width - GRID_SIZE || headY <= 0 || headY >= height - GRID_SIZE) { ;
+return true}
+else {return false}
 }
 
 /**
@@ -125,20 +129,5 @@ function keyPressed () {
       foodX = newFoodCoordinate () ;
     foodY = newFoodCoordinate () ;
    }
-   
-   
- if (!gameOver) {
-    headX += GRID_SIZE * xDirection ;
-    headY += GRID_SIZE * yDirection ;
- }
- if (
-    headX < 0||
-    headY < 0 ||
-    headX >= width ||
-    headY >=height
- ) }
-
-
-{
- gameOver = true 
 }
+
