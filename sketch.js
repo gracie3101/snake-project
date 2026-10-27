@@ -54,7 +54,6 @@ function setup () {
 
 function draw () {
     background (0)
-    fill(255);
     fill (0,255,0) ;
     circle (foodX, foodY, GRID_SIZE / 2) ;
    
@@ -125,6 +124,7 @@ function newFoodCoordinate () {
  */
 
 function isGameOver () {
+  fill(255,0,0)
    if (snakeX[0] <= 0 || snakeX[0] >= width - GRID_SIZE || snakeY[0] <= 0 || snakeY[0] >= height - GRID_SIZE) { ;
 return true}
 else {return false}
