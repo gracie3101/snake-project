@@ -6,7 +6,7 @@ let xDirection = 1 ;
 let yDirection = 0 ;
 let foodX = 0
 let foodY = 0
-let isSnakeOverFood = () => snakeX === foodX && snakeY === foodY
+
 
 /**
  * Sets up the canvas and initial game state
@@ -72,7 +72,7 @@ function draw () {
     // Draw the snake
     
     function drawSnake () {
-      fill (0,255,0) ;
+      fill (0, 255, 0) ;
       for (let i = 0; i < snakeX.length; i++) {
         if (i === 0) {
           fill (255,0,0) ;
