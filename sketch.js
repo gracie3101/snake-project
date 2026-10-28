@@ -7,7 +7,6 @@ let yDirection = 0 ;
 let foodX = 0
 let foodY = 0
 
-
 /**
  * Sets up the canvas and initial game state
  * @param {number} width - The width of the canvas
@@ -69,20 +68,15 @@ function draw () {
     text("GAME_OVER", width / 2, height / 2) }
 
     // Draw the snake
-    
-    function drawSnake () {
-      fill (0, 255, 0) ;
-      for (let i = 0; i < snakeX.length; i++) {
-        if (i === 0) {
-          fill (255,0,0) ;
-        }
-        else {
-          fill (0,255,0) ;
-        }
-        square (snakeX[i], snakeY[i], GRID_SIZE) ;
-      }
-    
+    drawSnake () 
+   
+   moveSnake () 
+
+   if (isSnakeOverFood ()=== true) {
+    foodX = newFoodCoordinate ()
+    foodY = newFoodCoordinate ()
    }
+    
    }
 
    // Adds a new segment to the snake's body
@@ -93,11 +87,11 @@ function draw () {
   }
    
   function moveSnake () {
-    snakeX.unshift(snakeX[0] + GRID_SIZE * xDirection);
-    snakeY.unshift(snakeY[0] + GRID_SIZE *yDirection);
-    snakeX.pop() ;
-    snakeY.pop() ;
+    for (let i = 0; i < snakeX.length; i++) {
+  snakeX[i] + GRID_SIZE * xDirection;
+  snakeY[i] + GRID_SIZE *yDirection;
   }
+}
 
   function randomCoordinate () {
     let margin = GRID_SIZE * 2;
@@ -128,7 +122,15 @@ function isGameOver () {
    if (snakeX[0] <= 0 || snakeX[0] >= width - GRID_SIZE || snakeY[0] <= 0 || snakeY[0] >= height - GRID_SIZE) { ;
 return true}
 else {return false}
+   }
+
+function isSnakeOverFood () {
+  if (snakeX[0] === foodX && snakeY[0] === foodY) {
+    return true
+  }
+    
 }
+
 
 /**
  * Handles key presses for controlling the snake's movement
@@ -160,10 +162,22 @@ function keyPressed () {
     yDirection = 1 ;
    }
 
-   if (isSnakeOverFood()) {
-      foodX = newFoodCoordinate () ;
-    foodY = newFoodCoordinate () ;
-    addSnakeSegment () ;
+   
    }
-}
+
+
+
+ function drawSnake () {
+      fill (0, 255, 0) ;
+      for (let i = 0; i < snakeX.length; i++) {
+        if (i === 0) {
+          fill (255,0,0) ;
+        }
+        else {
+          fill (0,255,0) ;
+        }
+        square (snakeX[i], snakeY[i], GRID_SIZE) ;
+      }
+    
+   }
 
