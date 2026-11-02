@@ -100,8 +100,8 @@ function draw () {
    
   function moveSnake () {
     for (let i = 0; i < snakeX.length; i++) {
-  snakeX.sements[i] + GRID_SIZE * xDirection;
-  snakeY.segments[i] + GRID_SIZE * yDirection;
+  snakeX.segments[i] += GRID_SIZE * xDirection;
+  snakeY.segments[i] += GRID_SIZE * yDirection;
   }
 }
 
