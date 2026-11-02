@@ -100,8 +100,8 @@ function draw () {
    
   function moveSnake () {
     for (let i = 0; i < snakeX.length; i++) {
-  snakeX.segments[i] += GRID_SIZE * xDirection;
-  snakeY.segments[i] += GRID_SIZE * yDirection;
+  snakeX[i] += GRID_SIZE * xDirection;
+  snakeY[i] += GRID_SIZE * yDirection;
   }
 }
 
@@ -138,7 +138,7 @@ else {return false}
 
 function isSnakeOverFood () {
   
-    return food.x >= snake.segments[0].x && food.x <= snake.segments[0].x + GRID_SIZE && food.y >= snake.segments[0].y && food.y <= snake.segments[0].y + GRID_SIZE;
+    return foodX >= snake.segments[0].x && foodX <= snake.segments[0].x + GRID_SIZE && foodY >= snake.segments[0].y && foodY <= snake.segments[0].y + GRID_SIZE;
   }
     
 
