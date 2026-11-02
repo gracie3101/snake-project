@@ -2,6 +2,16 @@ const GRID_SIZE = 20
 
 let snakeX = [20];
 let snakeY = [260];
+
+let snake = {
+  segments: [{ 
+    x: snakeX[0],
+    y: snakeY[0] }],
+
+    direction: { x: 1,
+       y: 0 },
+};
+
 let xDirection = 1 ;
 let yDirection = 0 ;
 let foodX = 0
@@ -73,8 +83,10 @@ function draw () {
    moveSnake () 
 
    if (isSnakeOverFood ()=== true) {
-    foodX = newFoodCoordinate ()
-    foodY = newFoodCoordinate ()
+    foodX = newFoodCoordinate ();
+    foodY = newFoodCoordinate ();
+    addSnakeSegment ();
+    generateNewFood ();
    }
     
    }
@@ -82,14 +94,14 @@ function draw () {
    // Adds a new segment to the snake's body
 
    function addSnakeSegment () {
-    snakeX.push(snakeX[snakeX.length - 1] - GRID_SIZE * xDirection);
-    snakeY.push(snakeY[snakeY.length - 1] - GRID_SIZE * yDirection);
+    snakeX.segments.push({ x: snakeX.segments[snakeX.length - 1].x - GRID_SIZE * xDirection, y: snakeX.segments[snakeX.length - 1].y - GRID_SIZE * yDirection });
+    snakeY.segments.push(snakeY.segments[snakeY.length - 1].y - GRID_SIZE * yDirection);
   }
    
   function moveSnake () {
     for (let i = 0; i < snakeX.length; i++) {
-  snakeX[i] + GRID_SIZE * xDirection;
-  snakeY[i] + GRID_SIZE *yDirection;
+  snakeX.sements[i] + GRID_SIZE * xDirection;
+  snakeY.segments[i] + GRID_SIZE * yDirection;
   }
 }
 
@@ -125,11 +137,11 @@ else {return false}
    }
 
 function isSnakeOverFood () {
-  if (snakeX[0] === foodX && snakeY[0] === foodY) {
-    return true
+  
+    return food.x >= snake.segments[0].x && food.x <= snake.segments[0].x + GRID_SIZE && food.y >= snake.segments[0].y && food.y <= snake.segments[0].y + GRID_SIZE;
   }
     
-}
+
 
 
 /**
