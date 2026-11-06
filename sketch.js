@@ -4,13 +4,15 @@ let snakeX = [20];
 let snakeY = [260];
 
 let snake = {
-  segments: [{ 
-    x: snakeX[0],
-    y: snakeY[0] }],
-
-    direction: { x: 1,
-       y: 0 },
-};
+    segments: [{
+        x: 20,
+        y: 260
+    }],
+    direction: {
+        x: 1,
+        y: 0
+    }
+}
 
 let xDirection = 1 ;
 let yDirection = 0 ;
@@ -46,6 +48,7 @@ function setup () {
     frameRate (5) ;
     foodX = newFoodCoordinate () ;
       foodY = newFoodCoordinate () ;
+      generateNewFood () ;
 
 }
 
@@ -99,11 +102,14 @@ function draw () {
   }
    
   function moveSnake () {
+    snake.segments.unshift({ x: snakeX[0] + GRID_SIZE * xDirection, y: snakeY[0] + GRID_SIZE * yDirection });
+    snake.segments.pop();
+  }
     for (let i = 0; i < snakeX.length; i++) {
   snakeX[i] += GRID_SIZE * xDirection;
   snakeY[i] += GRID_SIZE * yDirection;
   }
-}
+
 
   function randomCoordinate () {
     let margin = GRID_SIZE * 2;
@@ -122,7 +128,13 @@ function newFoodCoordinate () {
       let numberOfCells = (width - GRID_SIZE * 2) / GRID_SIZE;
     let gridCell = floor(random(numberOfCells));
     return gridCell * GRID_SIZE + GRID_SIZE / 2;
+
 }
+
+function generateNewFood () {
+    foodX = newFoodCoordinate();
+    foodY = newFoodCoordinate();
+  }
 
 /**
  * Checks if the game is over
