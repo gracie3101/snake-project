@@ -1,5 +1,6 @@
 const GRID_SIZE = 20
 
+
 let snakeX = [20];
 let snakeY = [260];
 
